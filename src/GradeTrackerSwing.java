@@ -5,7 +5,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 // FontUIResource is the type Swing uses for its default fonts
 import javax.swing.plaf.FontUIResource;
-// AWT gives us layout managers (BorderLayout, FlowLayout, CardLayout, ...), Font and Color
+// AWT gives layout managers (BorderLayout, FlowLayout, CardLayout, ...), Font and Color
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,9 +15,6 @@ import java.util.List;
  * Student Grade Tracker with two pages (see the UI sketch):
  *   Page 1 - add students (name, student number, average grade)
  *   Page 2 - linear search by average grade, with results shown in a table
- *
- * Requires Java 16+ (uses a record).
- *
  * A JFrame is the main window. By extending it, our class IS a window,
  * so we can call methods like add() and setSize() directly.
  */
@@ -31,40 +28,39 @@ public class GradeTrackerSwing extends JFrame {
     private static final double MIN_GRADE = 0;
     private static final double MAX_GRADE = 100;
 
-    // Names for our two pages. CardLayout uses these names to know which page to show.
+    // Names for two pages. CardLayout uses these names to know which page to show.
     private static final String PAGE_ADD = "add";
     private static final String PAGE_SEARCH = "search";
 
-    // --- Colour palette: one accent colour plus soft greys keeps the UI calm ---
-    private static final Color ACCENT = new Color(0x2F6FED);       // blue, used for titles
-    private static final Color SELECTION = new Color(0xDCE8FF);    // light blue for selected rows
-    private static final Color BORDER_GREY = new Color(0xD9D9D9);  // thin outlines
-    private static final Color MUTED = new Color(0x6B6B6B);        // grey text for status messages
+    //Colour palette
+    private static final Color ACCENT = new Color(0x7353CE);
+    private static final Color SELECTION = new Color(0xDCE8FF);
+    private static final Color BORDER_GREY = new Color(0xD9D9D9);
+    private static final Color MUTED = new Color(0x6B6B6B); // grey text for status messages
 
     // The real data lives here. The table on screen is just a display of this list.
     private final List<Student> students = new ArrayList<>();
 
-    // --- CardLayout: shows ONE panel at a time, like a stack of cards ---
+    //CardLayout: shows ONE panel at a time, like a stack of cards
     // Perfect for switching between "pages" inside the same window.
     private final CardLayout cards = new CardLayout();
     private final JPanel cardPanel = new JPanel(cards);
 
-    // --- Page 1 components ---
-    // The number is a preferred width in "columns" (roughly characters).
+    //  Page 1
     private final JTextField txtName = new JTextField(20);
     private final JTextField txtNumber = new JTextField(20);
     private final JTextField txtGrade = new JTextField(20);
     private final JLabel lblAddStatus = new JLabel(" ");
 
-    // --- Page 2 components ---
-    // The prompt is a field (not hard-coded text) because the sketch says it should
+    //  Page 2 components
+    // The prompt is a field (not hard-coded text)
     // change later depending on what the user searches for (name, number or grade).
     private final JLabel lblSearchPrompt = new JLabel("Enter grade:");
     private final JTextField txtSearch = new JTextField(6);
     private final JLabel lblSearchStatus = new JLabel(" ");
 
     // JTable shows the data, but the TableModel actually stores the rows.
-    // Here we create a model with 3 column headers and 0 starting rows.
+    // Model with 3 column headers and 0 starting rows.
     private final DefaultTableModel tableModel =
             new DefaultTableModel(new String[]{"Name", "Student No.", "Avg Grade"}, 0) {
                 // By default, table cells can be edited by double-clicking.
@@ -76,18 +72,17 @@ public class GradeTrackerSwing extends JFrame {
     public GradeTrackerSwing() {
         super("Student Grade Tracker");              // sets the window title
         setDefaultCloseOperation(EXIT_ON_CLOSE);     // clicking X ends the program
-
-        // Padding around the whole window so nothing touches the edges.
-        // getContentPane() is the main area inside the window's frame.
+        // Padding around the whole window so nothing touches the edges
+        // getContentPane() is the main area inside the window's frame
         ((JComponent) getContentPane()).setBorder(BorderFactory.createEmptyBorder(16, 20, 16, 20));
 
-        // Add both pages to the card panel, each with its name.
-        // Only the first page added is visible until we call showPage().
+        // Add both pages to the card panel
+        // Only the first page added is visible until showPage()
         cardPanel.add(buildAddPage(), PAGE_ADD);
         cardPanel.add(buildSearchPage(), PAGE_SEARCH);
-        add(cardPanel); // a JFrame uses BorderLayout by default, so this fills the whole window
+        add(cardPanel); // Fills the whole window - JFrame uses BorderLayout by default
 
-        // Pressing Enter inside a text field fires its ActionListener.
+        // Pressing Enter inside a text field fires ActionListener.
         // "e -> ..." is a lambda: a short way to write "when this happens, run this code".
         txtName.addActionListener(e -> txtNumber.requestFocusInWindow());  // move to next field
         txtNumber.addActionListener(e -> txtGrade.requestFocusInWindow());
@@ -100,14 +95,12 @@ public class GradeTrackerSwing extends JFrame {
         setVisible(true);                         // windows are hidden until you call this
     }
 
-    // ---------- UI construction ----------
-    // Each method below builds one page of the window and returns it.
-
+    // UI construction
     /** UI page 1: the "add student" form. */
     private JPanel buildAddPage() {
         JLabel title = makeTitle("Student Grade Tracker");
 
-        // GridLayout(3, 2, ...) = 3 rows, 2 columns: a label on the left, a field on the right.
+        // GridLayout(3, 2, ...) = 3 rows, 2 columns
         // The last two numbers are the horizontal and vertical gaps between cells.
         JPanel form = new JPanel(new GridLayout(3, 2, 12, 12));
         form.add(new JLabel("Student"));
@@ -123,7 +116,7 @@ public class GradeTrackerSwing extends JFrame {
         JButton btnAdd = new JButton("Add Student");
         btnAdd.addActionListener(e -> addStudent());
 
-        // This button switches to page 2
+        /** This button switches to page 2 */
         JButton btnGoSearch = new JButton("Search Grade");
         btnGoSearch.addActionListener(e -> showPage(PAGE_SEARCH));
 
@@ -136,8 +129,8 @@ public class GradeTrackerSwing extends JFrame {
         // A small message line under the buttons ("Added: ...")
         lblAddStatus.setForeground(MUTED);
 
-        // We stack title, form, buttons and status vertically.
-        // GridBagLayout/BoxLayout can do this too, but nested BorderLayouts are easy to read.
+        // Stack title, form, buttons and status vertically.
+        // GridBagLayout/BoxLayout can do this too, nested BorderLayouts are easy to read.
         JPanel formWrap = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0)); // keeps form at its size
         formWrap.add(form);
 
@@ -150,7 +143,6 @@ public class GradeTrackerSwing extends JFrame {
         bottom.add(lblAddStatus, BorderLayout.CENTER);
 
         // Pinning "top" to NORTH means the content stays at the top of the page
-        // instead of stretching to fill all the empty space.
         JPanel page = new JPanel(new BorderLayout(0, 20));
         page.add(top, BorderLayout.NORTH);
         page.add(bottom, BorderLayout.CENTER);
@@ -159,14 +151,14 @@ public class GradeTrackerSwing extends JFrame {
 
     /** UI page 2: linear search by grade, plus a table of students. */
     private JPanel buildSearchPage() {
-        // The sketch has no "back" button, but without one there is no way to return to page 1
+        //back button
         JButton btnBack = new JButton("\u2190 Back");   // \u2190 is a left arrow
         btnBack.addActionListener(e -> showPage(PAGE_ADD));
 
         JPanel backRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         backRow.add(btnBack);
 
-        // --- Search row: "Linear Search" on the left, "Enter grade: [  ] [Search]" on the right ---
+        //Search row: "Linear Search" on the left, "Enter grade: [  ] [Search]" on the right
         JLabel algorithm = makeTitle("Linear Search");
 
         JButton btnSearch = new JButton("Search");
@@ -199,8 +191,8 @@ public class GradeTrackerSwing extends JFrame {
 
     /** Styles the table and wraps it in a scroll pane. */
     private JScrollPane buildTable() {
-        table.setRowHeight(28);                       // taller rows are easier to read
-        table.setShowVerticalLines(false);            // horizontal lines only = cleaner look
+        table.setRowHeight(28);                       // taller rows
+        table.setShowVerticalLines(false);            // horizontal lines = cleaner look
         table.setGridColor(BORDER_GREY);
         table.setSelectionBackground(SELECTION);
         table.setSelectionForeground(Color.BLACK);
@@ -209,20 +201,20 @@ public class GradeTrackerSwing extends JFrame {
         table.getTableHeader().setFont(
                 table.getTableHeader().getFont().deriveFont(Font.BOLD));
 
-        // A renderer decides how a cell is drawn. Here we just centre the text
-        // in the "Student No." (column 1) and "Avg Grade" (column 2) columns.
+        // A renderer decides how a cell is drawn
+        // Centre the text in the "Student No." (column 1) and "Avg Grade" (column 2) columns.
         DefaultTableCellRenderer centered = new DefaultTableCellRenderer();
         centered.setHorizontalAlignment(SwingConstants.CENTER);
         table.getColumnModel().getColumn(1).setCellRenderer(centered);
         table.getColumnModel().getColumn(2).setCellRenderer(centered);
 
-        // Tables don't scroll on their own. You must wrap them in a JScrollPane.
+        // Tables don't scroll on their own - wrap them in a JScrollPane.
         JScrollPane scroll = new JScrollPane(table);
         scroll.setBorder(BorderFactory.createLineBorder(BORDER_GREY));
         return scroll;
     }
 
-    // ---------- Actions (what happens when the user clicks something) ----------
+    //  Actions (what happens when the user clicks something)
 
     private void addStudent() {
         // trim() removes accidental spaces at the start and end
@@ -230,7 +222,7 @@ public class GradeTrackerSwing extends JFrame {
         if (name.isEmpty()) {
             showError("Please enter a student name.");
             txtName.requestFocusInWindow(); // put the cursor back in the field to fix
-            return;                          // stop here; don't add anything
+            return;
         }
 
         // These helpers show their own error message and return null if the input is bad
@@ -249,7 +241,7 @@ public class GradeTrackerSwing extends JFrame {
         students.add(new Student(name, number, grade));
         lblAddStatus.setText("Added: " + name + " (No. " + number + ", grade " + grade + ")");
 
-        // Clear the fields so the next student can be typed straight away
+        // Clear fields so the next student can be typed straight away
         txtName.setText("");
         txtNumber.setText("");
         txtGrade.setText("");
@@ -277,10 +269,8 @@ public class GradeTrackerSwing extends JFrame {
         lblSearchStatus.setText("Found " + matches.size() + " student(s) with grade " + target + ".");
     }
 
-    /**
-     * Linear search: look at every item in order, one by one, until the end.
-     * Returns the positions (indices) of all students whose grade matches.
-     */
+    /** Linear search: look at every item in order, one by one, until the end
+     * Returns the positions (indices) of all students whose grade matches. */
     private List<Integer> linearSearch(double target) {
         List<Integer> matches = new ArrayList<>();
         for (int i = 0; i < students.size(); i++) {
@@ -305,7 +295,7 @@ public class GradeTrackerSwing extends JFrame {
         cards.show(cardPanel, page); // CardLayout hides the current page and shows this one
     }
 
-    // ---------- Helpers ----------
+    //  Helpers
 
     /** Converts text to a student number. Returns null (after showing an error) if invalid. */
     private Integer parseStudentNumber(String text) {
@@ -328,14 +318,13 @@ public class GradeTrackerSwing extends JFrame {
         }
     }
 
-    /**
-     * Converts text to a grade and checks it is in range.
+    /** Converts text to a grade and checks it is in range.
      * Returns a Double (not double) so it can return null to mean "invalid input".
      */
     private Double parseGrade(String text) {
         try {
             double grade = Double.parseDouble(text.trim());
-            // Double.parseDouble accepts the text "NaN" (not a number), so we reject it explicitly
+            // Double.parseDouble accepts the text "NaN" (not a number)
             if (Double.isNaN(grade) || grade < MIN_GRADE || grade > MAX_GRADE) {
                 showError("Grade must be a number between " + (int) MIN_GRADE
                         + " and " + (int) MAX_GRADE + ".");
@@ -348,8 +337,7 @@ public class GradeTrackerSwing extends JFrame {
         }
     }
 
-    /**
-     * Rebuilds the table from the students list.
+    /** Rebuilds the table from the students list.
      * Simple approach: clear everything, then add every row again.
      * This keeps the table and the list always in sync.
      */
@@ -366,7 +354,7 @@ public class GradeTrackerSwing extends JFrame {
         JOptionPane.showMessageDialog(this, message, "Input error", JOptionPane.WARNING_MESSAGE);
     }
 
-    /** Creates a bold, blue heading label. */
+    /** Creates a heading label. */
     private static JLabel makeTitle(String text) {
         JLabel label = new JLabel(text);
         // deriveFont creates a copy of the current font with a new style and size
@@ -386,7 +374,7 @@ public class GradeTrackerSwing extends JFrame {
      */
     private static void setupLookAndFeel() {
         try {
-            // Use the look of the operating system (Windows, macOS, ...) instead of the old "Metal" style
+            // Use the look of the operating system (Windows, macOS, ...)
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ignored) {
             // If it fails, Swing simply keeps its default look. Nothing to fix.
