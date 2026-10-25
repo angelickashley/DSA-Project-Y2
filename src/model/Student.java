@@ -5,7 +5,7 @@ public class Student {
 	private int    number;
 	private double grade;
 
-	public Student(String name, int num, long grade) {
+	public Student(String name, int num, double grade) {
 		this.name   = name;
 		this.number = num;
 		this.grade  = Math.clamp(grade, 0, 100);
@@ -68,4 +68,16 @@ public class Student {
 		"student:{\"" + this.name + "\", " + this.number + ", " + this.grade + "%}";
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		
+		if (!(o instanceof Student)) return false;
+
+		Student s = (Student) o;
+
+		return this.name.equals(s.name)
+			&& this.number == s.number
+			&& Math.abs(this.grade - s.grade) < .001;
+	}
 }

@@ -86,6 +86,10 @@ public class LeftJustifiedList<T> {
 		return -1;
 	}
 
+	public boolean contains(T value) {
+		return indexOf(value) != -1;
+	}
+
 	/**
 	 * uses bubble sort to sort arbitrary data, given a comparator function
 	 * @param comparator the function used to decide whether one element is bigger than another<br/>
@@ -127,8 +131,9 @@ public class LeftJustifiedList<T> {
 		for (int i = 0; i < this.count; i++) {
 			str += this.array[i].toString();
 			if (i < this.count - 1) str += ", ";
-			else str += "}";
+			
 		}
+		str += "}";
 		return str;
 	}
 }
