@@ -1,4 +1,4 @@
-// Swing components (JDialog, JButton, JTextArea, ...) live in javax.swing
+package tests;// Swing components (JDialog, JButton, JTextArea, ...) live in javax.swing
 import javax.swing.*;
 // AWT gives us layout managers, Color, Graphics and Window
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * Quick use from any window:
  *
- *     Integer value = WarningDialog.requireInteger(this, txtKey.getText(), "Key");
+ *     Integer value = tests.WarningDialog.requireInteger(this, txtKey.getText(), "Key");
  *     if (value == null) return;     // the warning was already shown, so just stop
  *
  * Every require...() method returns null when the input is bad.
@@ -24,7 +24,7 @@ public class WarningDialog extends JDialog {
 
     // The dialog itself
 
-    /** Private on purpose: use WarningDialog.show(...) instead. */
+    /** Private on purpose: use tests.WarningDialog.show(...) instead. */
     private WarningDialog(Window owner, String message) {
         // ModalityType.APPLICATION_MODAL = the user must close this before using the app again
         super(owner, "Warning", ModalityType.APPLICATION_MODAL);

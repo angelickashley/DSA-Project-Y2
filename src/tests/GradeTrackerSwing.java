@@ -1,4 +1,4 @@
-// Swing components (JFrame, JButton, JTable, ...) live in javax.swing
+package tests;// Swing components (JFrame, JButton, JTable, ...) live in javax.swing
 import javax.swing.*;
 // DefaultTableModel holds the data a JTable displays; the renderer controls how a cell looks
 import javax.swing.table.DefaultTableCellRenderer;

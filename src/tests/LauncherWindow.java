@@ -1,4 +1,4 @@
-// Swing components (JFrame, JButton, JPanel, ...) live in javax.swing
+package tests;// Swing components (JFrame, JButton, JPanel, ...) live in javax.swing
 import javax.swing.*;
 // FontUIResource is the type Swing uses for its default fonts
 import javax.swing.plaf.FontUIResource;
@@ -93,7 +93,7 @@ public class LauncherWindow extends JFrame {
      */
     private void openMainApp(boolean continuing) {
         // TODO: replace this message with main window, for example:
-        //       new GradeTrackerSwing().setVisible(true);
+        //       new tests.GradeTrackerSwing().setVisible(true);
         // (load the saved list from ListStore.path() when continuing is true)
         JOptionPane.showMessageDialog(this,
                 continuing ? "Main window would open with the saved list."

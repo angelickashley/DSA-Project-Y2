@@ -1,4 +1,4 @@
-// Swing components (JDialog, JButton, JLabel, Timer, ...) live in javax.swing
+package tests;// Swing components (JDialog, JButton, JLabel, Timer, ...) live in javax.swing
 import javax.swing.*;
 // AWT gives us layout managers, Color, Graphics and Window
 import java.awt.*;
@@ -18,10 +18,10 @@ import java.util.List;
  *
  * How to use it on your search screen: add the round "i" button to any panel.
  *
- *     panel.add(InfoDialog.createInfoButton());
+ *     panel.add(tests.InfoDialog.createInfoButton());
  *
  * The colours are public constants, search code can flash rows in
- * exactly the same colours the guide shows (InfoDialog.RED, .PINK, .YELLOW).
+ * exactly the same colours the guide shows (tests.InfoDialog.RED, .PINK, .YELLOW).
  */
 public class InfoDialog extends JDialog {
 
