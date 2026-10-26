@@ -89,8 +89,9 @@ public class GradeTrackerSwing extends JFrame {
         txtGrade.addActionListener(e -> addStudent());
         txtSearch.addActionListener(e -> searchGrade());
 
-        setSize(560, 480);
-        setMinimumSize(new Dimension(520, 420));  // stops the window being shrunk until it breaks
+        setSize(400, 300);
+        setMinimumSize(new Dimension(250, 200));  // stops the window being shrunk until it breaks
+	
         setLocationRelativeTo(null);              // passing null centres the window on screen
         setVisible(true);                         // windows are hidden until you call this
     }
@@ -152,7 +153,7 @@ public class GradeTrackerSwing extends JFrame {
     /** UI page 2: linear search by grade, plus a table of students. */
     private JPanel buildSearchPage() {
         //back button
-        JButton btnBack = new JButton("\u2190 Back");   // \u2190 is a left arrow
+        JButton btnBack = new JButton("Add Student");   // \u2190 is a left arrow
         btnBack.addActionListener(e -> showPage(PAGE_ADD));
 
         JPanel backRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));

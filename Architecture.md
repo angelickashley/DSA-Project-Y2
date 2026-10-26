@@ -22,6 +22,10 @@ The `Model` package should not be changed much unless we need a new class, struc
 - `Student getStudentByID(int ID)`
 - `void addNewStudent(String name, int ID)`
 
+## Custom Elements
+Im using custom elements instead of `JButton` and `JTextField`. I've named them `AAButton` and `AATextField` for angelic/amelia or amelia/angelic (whichever way).
+These custom elements extend from the Java classes but have their own theme and some behavioural changes.
+
 ## Amelia's Code preferences
 These are not in any way necessary, I just like reading & writing code that follows these "rules".
 If you're ok with my suggestions, I'll implement them so don't feel obligated to change them for me.
