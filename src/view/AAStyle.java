@@ -11,7 +11,7 @@ final class AAStyle {
 		Graphics2D g2 = (Graphics2D) g.create();
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		Color pink = AppTheme.ACCENT_COLOUR_PINK;
+		Color pink = AppTheme.ACCENT_COLOUR_BRIGHT;
 		Color highlightFill = new Color(pink.getRed(), pink.getGreen(), pink.getBlue(), 40);
 
 		g2.setColor((hover || focused) ? highlightFill : new Color(0, 0, 0, 120));

@@ -22,7 +22,7 @@ public class AAButton extends JButton {
 		setOpaque(false);             // let the background image show through
 		setForeground(AppTheme.ACCENT_COLOUR_WHITE);
 		
-		setFont(new Font("Courier New", Font.PLAIN, 16));
+		setFont(AppTheme.NormalFont(AppTheme.P_SIZE));
 		// setPreferredSize(new Dimension(preferredWidth, preferredHeight));
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 

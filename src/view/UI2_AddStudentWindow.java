@@ -33,7 +33,7 @@ public class UI2_AddStudentWindow {
 			}
 		});
 		
-		JPanelWithBackground body = new JPanelWithBackground(AppTheme.APP_BACKGROUND_IMAGE_PATH);
+		AAPanel body = new AAPanel(AppTheme.APP_BACKGROUND_IMAGE_PATH);
 
 		// body.setLayout(new GridBagLayout());
 		
@@ -126,6 +126,8 @@ public class UI2_AddStudentWindow {
 				studentName.setText("");
 				studentNum.setText("");
 				studentGrade.setText("");
+
+				UI3_ListWindow.refreshTable();
 			}
 		);
 		AAButton ViewStudentListButton = AppTheme.ArtfulButton(

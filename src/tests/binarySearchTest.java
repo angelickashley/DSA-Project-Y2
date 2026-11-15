@@ -37,7 +37,7 @@ void main() {
 
 	// search by name, only that field matters, others do not have to match
 	BinarySearcher<Student> searcher = new BinarySearcher<Student>(
-		new Student("K. Healy", 91, 33),
+		new Student("K. Healy", 0,0),
 		list,
 		Student::compareName
 	);

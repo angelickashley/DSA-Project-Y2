@@ -5,30 +5,36 @@ import java.awt.*;
 import javax.swing.*;
 
 public class AppTheme {
-	public static String APP_NAME     = "Spider Lily";
-	public static String APP_TAG_LINE = "Student Grade Tracker";
+	public static String APP_NAME     = "Grade Tracker";
+	public static String APP_TAG_LINE = "By Angelic and Amelia";
 
 	public static int BORDER_RADIUS = 8;
 
-	public static Color ACCENT_COLOUR_WHITE  = new Color(0xF1E9E9);
-	public static Color ACCENT_COLOUR_PINK   = new Color(0xE491C9);
-	public static Color ACCENT_COLOUR_PURPLE = new Color(0x982598);
-	public static Color ACCENT_COLOUR_DARK   = new Color(0x15173D);
+	public static Color ACCENT_COLOUR_WHITE  = new Color(0xF3F3F3);
+	public static Color ACCENT_COLOUR_BRIGHT = new Color(0xC5E898);
+	public static Color ACCENT_COLOUR_MIDDLE = new Color(0x29ADB2);
+	public static Color ACCENT_COLOUR_DARK   = new Color(0x0766AD);
 
-	public static int H1_SIZE = 50;
-	public static int H2_SIZE = 25;
-	public static int P_SIZE = 18;
-	public static int NOTE_SIZE = 14;
+	public static int H1_SIZE = 46;
+	public static int H2_SIZE = 22;
+	public static int P_SIZE = 16;
+	public static int NOTE_SIZE = 12;
+	public static int TABLE_ENTRY_SIZE = 14;
+	
 
 	public static String LAUNCHER_BACKGROUND_IMAGE_PATH =
-		"assets/Spider Lily Launcher Background.png";
+		"assets/Grade Tracker Launcher Background.png";
 
 	public static String APP_BACKGROUND_IMAGE_PATH =
-		"assets/Spider Lily App Background.png";
+		"assets/Grade Tracker App Background.png";
+
+
+	public static String INFO_DIALOG_BACKGROUND_IMAGE_PATH =
+		"assets/Grade Tracker Info Dialog Background.png";
 
 
 	public static Font ArtfulFont(int size) {
-		return new Font("courier new", Font.BOLD, size);
+		return new Font("Courier new", Font.BOLD, size);
 	}
 	public static Font NormalFont(int size) {
 		return new Font("Consolas", Font.BOLD, size);
@@ -49,7 +55,7 @@ public class AppTheme {
 		if (preferredHeight != 0 && preferredWidth != 0)
 			button.setPreferredSize(new Dimension(preferredWidth, 40));
 		
-		button.addActionListener(e -> onClick.run());
+		if (onClick != null) button.addActionListener(e -> onClick.run());
 
 		return button;
 	}

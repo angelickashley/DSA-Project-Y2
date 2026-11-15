@@ -3,13 +3,18 @@ package controller;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import model.*;
 import view.UI1_Launcher;
 
 class EntryPoint {
+
 	public static void main() {
 		Database.Students = new LeftJustifiedList<Student>(30, 5);
+		
 		try {
 			// Use the look of the operating system (Windows, macOS, ...)
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

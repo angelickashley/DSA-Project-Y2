@@ -17,7 +17,7 @@ public class UI1_Launcher {
 		launcherFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		launcherFrame.setResizable(false);
 		
-		JPanelWithBackground bg = new JPanelWithBackground(AppTheme.LAUNCHER_BACKGROUND_IMAGE_PATH);
+		AAPanel bg = new AAPanel(AppTheme.LAUNCHER_BACKGROUND_IMAGE_PATH);
 
 		JLabel titleLabel   = AppTheme.ArtfulText(
 			AppTheme.APP_NAME, AppTheme.H1_SIZE, Color.WHITE
@@ -41,7 +41,6 @@ public class UI1_Launcher {
 			}
 		);
 
-		
 		bg.setLayout(new GridBagLayout());
 
 		GridBagConstraints c = new GridBagConstraints();
@@ -58,10 +57,10 @@ public class UI1_Launcher {
 		launcherFrame.setVisible(true);
 	}
 }
-class JPanelWithBackground extends JPanel {
-	private Image backgroundImage;
+class AAPanel extends JPanel {
+	public Image backgroundImage;
 
-	public JPanelWithBackground(String fileName) {
+	public AAPanel(String fileName) {
 		setBackground(AppTheme.ACCENT_COLOUR_DARK); // fallback colour
 		try {
 			backgroundImage = ImageIO.read(new File(fileName));
@@ -77,7 +76,6 @@ class JPanelWithBackground extends JPanel {
 		// Draw the background image.
 		if (backgroundImage != null) {
 			g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-			
 		}
 	}
 }

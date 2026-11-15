@@ -25,9 +25,9 @@ public class AATextField extends JTextField {
 		setForeground(AppTheme.ACCENT_COLOUR_WHITE);
 		setCaretColor(AppTheme.ACCENT_COLOUR_WHITE);
 		setSelectionColor(new Color(
-				AppTheme.ACCENT_COLOUR_PINK.getRed(),
-				AppTheme.ACCENT_COLOUR_PINK.getGreen(),
-				AppTheme.ACCENT_COLOUR_PINK.getBlue(), 120));
+				AppTheme.ACCENT_COLOUR_BRIGHT.getRed(),
+				AppTheme.ACCENT_COLOUR_BRIGHT.getGreen(),
+				AppTheme.ACCENT_COLOUR_BRIGHT.getBlue(), 120));
 		setSelectedTextColor(AppTheme.ACCENT_COLOUR_WHITE);
 		setFont(AppTheme.NormalFont(AppTheme.P_SIZE));
 		setBorder(BorderFactory.createEmptyBorder(6, 10, 6, 10));
