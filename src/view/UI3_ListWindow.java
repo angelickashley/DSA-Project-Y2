@@ -175,6 +175,7 @@ public class UI3_ListWindow {
 				controller.AppSystem.SortStudents(comparator);
 				searchButton.setText("Start Binary Search");
 				refreshTable();
+				Table.repaint();
 				searchSteps = 0;
 			} else {
 				AppTheme.ShowError("Please enter a valid search query.");
